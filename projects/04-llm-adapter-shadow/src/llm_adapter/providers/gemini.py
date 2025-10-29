@@ -108,7 +108,7 @@ class GeminiProvider(BaseProvider):
             token = text.split()[0]
             if "." in token:
                 token = token.split(".")[-1]
-            token = re.sub(r"^[ <>:,\'\"]+|[ <>:,\'\"]+$", "", token)
+            token = re.sub(r"(?:^[ <>:,\'\"]+)|(?:[ <>:,\'\"]+$)", "", token)
             return token.upper()
 
         status_value: Any = None
