@@ -198,7 +198,7 @@ async def test_run_with_shadow_async_propagates_cancelled_error(
     shadow = _DummyAsyncProvider("shadow", behaviour=_never_complete)
 
     async def _cancel_and_raise(
-        awaitable: Awaitable[Any], timeout: float | None = None
+        awaitable: asyncio.Task[Any], timeout: float | None = None
     ) -> Any:
         awaitable.cancel()
         raise asyncio.CancelledError
