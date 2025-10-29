@@ -5,12 +5,8 @@ from dataclasses import dataclass
 import logging
 from threading import Thread
 from time import perf_counter
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:  # pragma: no cover - 型補完用
-    from adapter.core.provider_spi import ProviderSPI
-else:
-    from adapter.core.provider_spi import ProviderSPI
+from adapter.core.provider_spi import ProviderSPI
 
 from ..config import ProviderConfig
 from ..provider_spi import ProviderRequest
