@@ -178,3 +178,34 @@ async def test_run_with_shadow_async_records_shadow_error(tmp_path: Path) -> Non
     assert record["shadow_outcome"] == "error"
     assert record["shadow_error"] == "RuntimeError"
     assert record["shadow_error_message"] == "boom"
+
+
+@pytest.mark.asyncio
+async def test_run_with_shadow_async_propagates_cancelled_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    primary = _DummyAsyncProvider(
+        "primary",
+        behaviour=lambda req: _immediate_response(
+            "primary", latency_ms=10, token_usage=TokenUsage(prompt=0, completion=0)
+        ),
+    )
+
+    async def _never_complete(_: ProviderRequest) -> ProviderResponse:
+        await asyncio.Future()
+        raise AssertionError("unreachable")
+
+    shadow = _DummyAsyncProvider("shadow", behaviour=_never_complete)
+
+    async def _cancel_and_raise(
+        awaitable: asyncio.Task[Any], timeout: float | None = None
+    ) -> Any:
+        awaitable.cancel()
+        raise asyncio.CancelledError
+
+    monkeypatch.setattr("llm_adapter.shadow_async.asyncio.wait_for", _cancel_and_raise)
+
+    request = ProviderRequest(prompt="hello", model="primary-model")
+
+    with pytest.raises(asyncio.CancelledError):
+        await run_with_shadow_async(primary, shadow, request)
