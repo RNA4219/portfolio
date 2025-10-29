@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import logging
 from threading import Thread
 from time import perf_counter
+
 from adapter.core.provider_spi import ProviderSPI
 
 from ..config import ProviderConfig
