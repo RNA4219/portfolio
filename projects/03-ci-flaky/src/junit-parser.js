@@ -121,11 +121,7 @@ class JUnitAttemptBuilder {
   handle_text(text, info) {
     const current = this.nodeStack[this.nodeStack.length - 1];
     if (!current || typeof current.text !== 'string') return;
-    if (info?.isCData) {
-      current.text += text;
-    } else {
-      current.text += text;
-    }
+    current.text += text;
   }
 
   apply_timeout_classification() {
