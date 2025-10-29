@@ -90,6 +90,7 @@ async def run_with_shadow_async(
         raise
 
     metrics: ShadowMetrics | None = None
+    cancelled_exc: asyncio.CancelledError | None = None
     if shadow_task is not None:
         try:
             shadow_payload = await asyncio.wait_for(shadow_task, timeout=10)
@@ -103,8 +104,9 @@ async def run_with_shadow_async(
                 else None
             )
             shadow_payload = _make_timeout_payload(shadow_name, duration_ms)
-        except asyncio.CancelledError:  # pragma: no cover - defensive
+        except asyncio.CancelledError as exc:  # pragma: no cover - defensive
             shadow_payload = _make_shadow_payload(provider_name=shadow_name)
+            cancelled_exc = exc
 
         if shadow_payload is None:
             shadow_payload = _make_shadow_payload(provider_name=shadow_name)
@@ -119,6 +121,9 @@ async def run_with_shadow_async(
             shadow_payload=shadow_payload,
             shadow_name=shadow_name,
         )
+
+        if cancelled_exc is not None:
+            raise cancelled_exc
 
     if capture_metrics:
         return primary_res, metrics
