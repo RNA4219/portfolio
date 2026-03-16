@@ -31,6 +31,7 @@ if %errorlevel% neq 0 (
 echo.
 echo [2/3] Installing Python dependencies...
 py -3.11 -m pip install -r projects/04-llm-adapter-shadow/requirements.txt
+py -3.11 -m pip install -r projects/04-llm-adapter/requirements.txt
 if %errorlevel% neq 0 (
     echo [ERROR] pip install failed
     pause
