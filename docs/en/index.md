@@ -8,6 +8,22 @@ description: A portal showcasing QA / SDET / LLM highlights with weekly summarie
 
 > 🔎 Latest CI reports: [JUnit summary]({{ '/reports/junit/index.html' | relative_url }}) / [Flaky ranking]({{ '/reports/flaky/index.html' | relative_url }}) / [Coverage HTML]({{ '/reports/coverage/index.html' | relative_url }})
 
+## CI Metrics Trend
+
+<div class="metrics-card">
+  <img src="{{ '/assets/metrics/ci-pass-rate-flaky.svg' | relative_url }}" alt="CI Pass Rate & Flaky Trend" style="width: 100%; border-radius: 8px;">
+</div>
+
+<style>
+  .metrics-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+</style>
+
 # Demos
 
 <div class="demo-grid">
