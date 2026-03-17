@@ -1,3 +1,4 @@
+# Sync README metrics from latest test reports
 name: Sync README metrics
 
 concurrency:
