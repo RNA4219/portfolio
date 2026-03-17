@@ -1,3 +1,10 @@
+---
+layout: default
+title: QA Evidence Catalog (EN)
+description: English catalog of primary evidence linked from the RTM
+lang: en
+---
+
 # QA Evidence Catalog (EN)
 
 This catalog lists the primary sources referenced by the `EvidenceLink` entries in the RTM so that reviewers can access materials quickly during validation.
