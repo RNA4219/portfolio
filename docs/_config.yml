@@ -16,3 +16,4 @@ defaults:
 markdown: kramdown
 include:
   - _includes
+  - assets
