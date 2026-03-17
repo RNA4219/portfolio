@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from types import SimpleNamespace
 from typing import TYPE_CHECKING
@@ -21,7 +21,7 @@ def _normalize_mode(value: str) -> str:
     return value.replace("-", "_")
 
 
-class _RunnerMode(str, Enum):
+class _RunnerMode(StrEnum):
     SEQUENTIAL = "sequential"
     PARALLEL_ANY = "parallel_any"
     PARALLEL_ALL = "parallel_all"

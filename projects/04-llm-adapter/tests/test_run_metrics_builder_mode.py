@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 import pytest
@@ -18,7 +18,7 @@ from adapter.core.models import (
 from adapter.core.providers import ProviderResponse
 
 
-class DummyMode(str, Enum):
+class DummyMode(StrEnum):
     SEQUENTIAL = "sequential"
 
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from types import SimpleNamespace
 
 from adapter.core.aggregation_controller import AggregationController
@@ -10,7 +10,7 @@ from adapter.core.runner_api import RunnerConfig
 from adapter.core.runner_execution import SingleRunResult
 
 
-class _ModeEnum(str, Enum):
+class _ModeEnum(StrEnum):
     CONSENSUS = "consensus"
 
 

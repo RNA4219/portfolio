@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 
@@ -40,7 +40,7 @@ class RetriableError(RetryableError):
     """Raised for transient provider issues."""
 
 
-class SkipReason(str, Enum):
+class SkipReason(StrEnum):
     """Enumerates structured skip reasons."""
 
     UNKNOWN = "unknown"

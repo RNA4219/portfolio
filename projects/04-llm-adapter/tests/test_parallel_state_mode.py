@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 from adapter.core.datasets import GoldenTask
@@ -15,7 +15,7 @@ from adapter.core.parallel_state import build_cancelled_result
 from adapter.core.runner_api import RunnerConfig
 
 
-class RunnerMode(str, Enum):
+class RunnerMode(StrEnum):
     PARALLEL_ANY = "parallel_any"
 
 

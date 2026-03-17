@@ -20,9 +20,9 @@ from adapter.core.runner_api import RunnerConfig
 try:
     from adapter.core.runner_api import RunnerMode
 except ImportError:  # pragma: no cover - フォールバック
-    from enum import Enum
+    from enum import StrEnum
 
-    class RunnerMode(str, Enum):
+    class RunnerMode(StrEnum):
         CONSENSUS = "consensus"
 from adapter.core.runner_execution import SingleRunResult
 

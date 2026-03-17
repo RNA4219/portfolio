@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 from .config import ProviderConfig
 from .provider_spi import ProviderSPI
 
 
-class RunnerMode(str, Enum):
+class RunnerMode(StrEnum):
     SEQUENTIAL = "sequential"
     PARALLEL_ANY = "parallel_any"
     PARALLEL_ALL = "parallel_all"

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, FrozenInstanceError
-from enum import Enum
+from enum import StrEnum
 from typing import cast, TYPE_CHECKING
 
 from .shadow import DEFAULT_METRICS_PATH, MetricsPath
@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from .provider_spi import ProviderSPI
 
 
-class RunnerMode(str, Enum):
+class RunnerMode(StrEnum):
     """Execution strategies supported by :class:`Runner`/``AsyncRunner``."""
 
     SEQUENTIAL = "sequential"

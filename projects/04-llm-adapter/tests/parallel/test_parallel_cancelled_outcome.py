@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from typing import cast
 
 from adapter.core.providers import BaseProvider
@@ -11,7 +11,7 @@ try:  # pragma: no cover - 型補完と後方互換用
 except ImportError:  # pragma: no cover - RunnerMode 未導入環境向け
     from adapter.core.runner_api import RunnerConfig
 
-    class RunnerMode(str, Enum):  # type: ignore[misc]
+    class RunnerMode(StrEnum):  # type: ignore[misc]
         PARALLEL_ANY = "parallel_any"
 
 
