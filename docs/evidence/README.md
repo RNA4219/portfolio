@@ -4,37 +4,72 @@ title: QA Evidence Catalog
 description: RTMに記載されたEvidenceLinkの遷移先をまとめた検証一次情報カタログ
 ---
 
-# QA Evidence Catalog
+<section class="hero" style="padding: 2rem 0 3rem;">
+  <h1 class="hero__title">Evidence Catalog</h1>
+  <p class="hero__subtitle">RTM に記載された EvidenceLink の遷移先をまとめ、検証時に参照する一次情報を一覧化</p>
+</section>
 
-本カタログは RTM に記載された `EvidenceLink` の遷移先をまとめ、検証時に参照する一次情報を一覧化する。
+<div class="demo-grid">
+  <article class="demo-card">
+    <header>
+      <span class="demo-card__id">01</span>
+      <h2><a href="{{ '/evidence/spec2cases.html' | relative_url }}">Spec to Cases</a></h2>
+    </header>
+    <p>仕様書からテストケースを抽出する LLM × スキーマ駆動パイプライン</p>
+    <ul>
+      <li>ケース設計テンプレ: <code>examples/spec2cases/spec.sample.md</code></li>
+      <li>自動生成スクリプト: <code>projects/01-spec2cases-md2json/scripts/spec2cases.mjs</code></li>
+      <li>サンプルケース: <code>examples/spec2cases/cases.sample.json</code></li>
+    </ul>
+    <a class="demo-card__link" href="{{ '/evidence/spec2cases.html' | relative_url }}">View Details</a>
+  </article>
 
-## 01. Spec to Cases
-- ケース設計テンプレ: `../examples/spec2cases/spec.sample.md`
-- 自動生成スクリプト: `../../projects/01-spec2cases-md2json/scripts/spec2cases.mjs`
-- サンプルケース: `../examples/spec2cases/cases.sample.json`
+  <article class="demo-card">
+    <header>
+      <span class="demo-card__id">02</span>
+      <h2><a href="{{ '/evidence/llm2pw.html' | relative_url }}">LLM to Playwright</a></h2>
+    </header>
+    <p>受け入れ基準を拡張して自動生成 Playwright テストへ落とし込む PoC</p>
+    <ul>
+      <li>テスト概要: <code>projects/02-blueprint-to-playwright/tests/README.md</code></li>
+      <li>サンプルブループリント: <code>examples/llm2pw/blueprint.sample.json</code></li>
+      <li>デモHTML: <code>examples/llm2pw/demo</code></li>
+    </ul>
+    <a class="demo-card__link" href="{{ '/evidence/llm2pw.html' | relative_url }}">View Details</a>
+  </article>
 
-## 02. LLM to Playwright
-- テスト概要: `../../projects/02-blueprint-to-playwright/tests/README.md`
-- サンプルブループリント: `../examples/llm2pw/blueprint.sample.json`
-- デモHTML: `../examples/llm2pw/demo`
-- 自動生成シナリオ: `../../projects/02-blueprint-to-playwright/tests/generated`
-- ビジュアル差分: `../../projects/02-blueprint-to-playwright/tests/generated/__snapshots__`
+  <article class="demo-card">
+    <header>
+      <span class="demo-card__id">03</span>
+      <h2><a href="{{ '/evidence/flaky.html' | relative_url }}">CI Flaky Analyzer</a></h2>
+    </header>
+    <p>CI ログから Flaky テストを検知・可視化する CLI</p>
+    <ul>
+      <li>プロダクト README: <code>projects/03-ci-flaky/README.md</code></li>
+      <li>仕様書: <code>projects/03-ci-flaky/docs/spec_flaky_analyzer.md</code></li>
+      <li>解析ストア: <code>projects/03-ci-flaky/data/runs.jsonl</code></li>
+    </ul>
+    <a class="demo-card__link" href="{{ '/evidence/flaky.html' | relative_url }}">View Details</a>
+  </article>
 
-## 03. CI Flaky Analyzer
-- プロダクト README: `../../projects/03-ci-flaky/README.md`
-- 仕様書: `../../projects/03-ci-flaky/docs/spec_flaky_analyzer.md`
-- 解析ストア: `../../projects/03-ci-flaky/data/runs.jsonl` — `npx flaky parse --input <junit-xml>` で追記
-- サマリ HTML: `npx flaky analyze` で生成される `../../projects/03-ci-flaky/out/index.html`（CI からダウンロード可能）
+  <article class="demo-card">
+    <header>
+      <span class="demo-card__id">04</span>
+      <h2><a href="{{ '/evidence/llm-adapter.html' | relative_url }}">LLM Adapter</a></h2>
+    </header>
+    <p>複数プロバイダの比較・記録・可視化を一括で担う LLM アダプタ</p>
+    <ul>
+      <li>プロダクト README: <code>projects/04-llm-adapter/README.md</code></li>
+      <li>プロバイダ設定サンプル: <code>projects/04-llm-adapter/adapter/config/providers</code></li>
+      <li>ゴールデンタスク: <code>projects/04-llm-adapter/datasets/golden</code></li>
+    </ul>
+    <a class="demo-card__link" href="{{ '/evidence/llm-adapter.html' | relative_url }}">View Details</a>
+  </article>
+</div>
 
-## 04. LLM Adapter
-- プロダクト README: `../../projects/04-llm-adapter/README.md`
-- エビデンス詳細: `./llm-adapter.md`
-- プロバイダ設定サンプル: `../../projects/04-llm-adapter/adapter/config/providers`
-- ゴールデンタスク: `../../projects/04-llm-adapter/datasets/golden`
-
-## Docs Cross Reference
-- テスト計画: [テスト計画]({{ '/test-plan.html' | relative_url }})
-- 欠陥レポ例: [欠陥レポ例]({{ '/defect-report-sample.html' | relative_url }})
-- 週次サマリ: [週次サマリ]({{ '/weekly-summary.html' | relative_url }})
-
-> [English version]({{ '/en/evidence/README.html' | relative_url }})
+<div class="badges" style="justify-content: flex-start; margin-top: 3rem;">
+  <a href="{{ '/test-plan.html' | relative_url }}" class="badge">Test Plan</a>
+  <a href="{{ '/defect-report-sample.html' | relative_url }}" class="badge">Defect Report</a>
+  <a href="{{ '/weekly-summary.html' | relative_url }}" class="badge">Weekly Summary</a>
+  <a href="{{ '/en/evidence/README.html' | relative_url }}" class="badge">English Version</a>
+</div>
