@@ -2,158 +2,356 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>JUnit Summary</title>
     <style>
-      body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        margin: 2rem;
-        color: #1f2933;
-        background: #f8fafc;
+      :root {
+        --bg-primary: #0a0a0f;
+        --bg-secondary: #12121a;
+        --bg-card: rgba(255, 255, 255, 0.03);
+        --bg-card-hover: rgba(255, 255, 255, 0.06);
+        --text-primary: #f0f0f5;
+        --text-secondary: #a0a0b8;
+        --text-muted: #606078;
+        --accent-primary: #60a5fa;
+        --accent-secondary: #22d3ee;
+        --accent-gradient: linear-gradient(135deg, #818cf8 0%, #22d3ee 100%);
+        --border-color: rgba(255, 255, 255, 0.08);
+        --glow: 0 0 60px rgba(129, 140, 248, 0.15);
+        --radius: 16px;
+        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
       }
-      h1 {
-        margin-bottom: 0.5rem;
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+        background: var(--bg-primary);
+        line-height: 1.7;
+        background-image:
+          radial-gradient(ellipse 80% 50% at 50% -20%, rgba(129, 140, 248, 0.15), transparent),
+          radial-gradient(ellipse 60% 40% at 100% 50%, rgba(34, 211, 238, 0.08), transparent);
+      }
+      a {
+        color: var(--accent-primary);
+        text-decoration: none;
+      }
+      a:hover {
+        color: var(--accent-secondary);
+      }
+      .site-header {
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .site-header__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .site-header__title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .site-header__title span {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .site-header__nav {
+        display: flex;
+        gap: 2rem;
+      }
+      .site-header__nav a {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2.5rem 2rem 4rem;
+      }
+      .hero {
+        text-align: left;
+        padding: 2rem 0 2.5rem;
+      }
+      .hero__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        background: var(--bg-card);
+      }
+      .hero h1 {
+        margin: 0 0 1rem;
+        font-size: 3rem;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .meta {
+        color: var(--text-secondary);
+        width: min(100%, 48rem);
+        margin: 0 0 2rem;
+        font-size: 1.05rem;
       }
       .summary {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 0.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
         margin-bottom: 2rem;
       }
       .metric {
-        background: #fff;
-        border-radius: 0.75rem;
-        padding: 1rem;
-        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        padding: 1.2rem;
+        box-shadow: var(--glow);
       }
       .metric__label {
+        margin: 0 0 0.35rem;
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #64748b;
-        margin-bottom: 0.25rem;
+        color: var(--text-muted);
       }
       .metric__value {
-        font-size: 1.75rem;
-        font-weight: 600;
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+      .status-summary {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+      .table-shell {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--glow);
+      }
+      .table-scroll {
+        overflow-x: auto;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        background: #fff;
-        border-radius: 0.75rem;
-        overflow: hidden;
-        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
       }
       thead {
-        background: #0f172a;
-        color: #f8fafc;
+        background: rgba(255, 255, 255, 0.04);
       }
-      th, td {
-        padding: 0.75rem 1rem;
+      th,
+      td {
+        padding: 0.9rem 1rem;
         text-align: left;
         vertical-align: top;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       }
-      tr:nth-child(even) {
-        background: #f1f5f9;
+      th {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
       }
-      tr:hover {
-        background: #e2e8f0;
+      td {
+        color: var(--text-secondary);
       }
-      .status-passed { color: #0f766e; }
-      .status-failed { color: #b91c1c; }
-      .status-error { color: #b45309; }
-      .status-skipped { color: #475569; }
+      tbody tr:hover {
+        background: var(--bg-card-hover);
+      }
+      .cell-status {
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+      .status-passed .cell-status {
+        color: #34d399;
+      }
+      .status-failed .cell-status {
+        color: #f87171;
+      }
+      .status-error .cell-status {
+        color: #fb923c;
+      }
+      .status-skipped .cell-status {
+        color: #cbd5e1;
+      }
       pre {
         margin: 0;
         white-space: pre-wrap;
         word-break: break-word;
-        font-family: ui-monospace, SFMono-Regular, SFMono, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        font-family: var(--font-mono);
         font-size: 0.75rem;
-        color: #334155;
-        background: #e2e8f0;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
+        color: #dbe4ff;
+        background: rgba(15, 23, 42, 0.7);
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
       }
-      .numeric { text-align: right; }
-      .meta {
-        color: #475569;
-        margin-top: 1rem;
-        font-size: 0.85rem;
+      .numeric {
+        text-align: right;
+      }
+      .site-footer {
+        border-top: 1px solid var(--border-color);
+        padding: 2rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+      @media (max-width: 768px) {
+        .site-header {
+          padding: 1rem;
+        }
+        .site-header__nav {
+          display: none;
+        }
+        main {
+          padding: 2rem 1rem 3rem;
+        }
+        .hero h1 {
+          font-size: 2.25rem;
+        }
+        .meta {
+          font-size: 0.95rem;
+        }
       }
     </style>
   </head>
   <body>
-    <h1>JUnit Summary</h1>
-    <p class="meta">生成日時: 2025-09-24T01:32:16.655Z / 実行時間合計: 0.004 秒</p>
-    <section class="summary">
-      <div class="metric"><p class="metric__label">Total</p><p class="metric__value">6</p></div>
-      <div class="metric"><p class="metric__label">Passed</p><p class="metric__value">6</p></div>
-      <div class="metric"><p class="metric__label">Failed</p><p class="metric__value">0</p></div>
-      <div class="metric"><p class="metric__label">Errors</p><p class="metric__value">0</p></div>
-      <div class="metric"><p class="metric__label">Skipped</p><p class="metric__value">0</p></div>
-      <div class="metric"><p class="metric__label">Suites</p><p class="metric__value">1</p></div>
-    </section>
-    <table>
-      <thead>
-        <tr>
-          <th>Suite</th>
-          <th>Class</th>
-          <th>Name</th>
-          <th>Status</th>
-          <th class="numeric">Duration (ms)</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="status-passed">
-          <td>playwright-stub</td>
-          <td>generated</td>
-          <td>data-driven login — happy path</td>
-          <td>passed</td>
-          <td class="numeric">3</td>
-          <td></td>
-        </tr>
-        <tr class="status-passed">
-          <td>playwright-stub</td>
-          <td>generated</td>
-          <td>data-driven login — invalid password</td>
-          <td>passed</td>
-          <td class="numeric">1</td>
-          <td></td>
-        </tr>
-        <tr class="status-passed">
-          <td>playwright-stub</td>
-          <td>generated</td>
-          <td>dashboard visual smoke snapshot</td>
-          <td>passed</td>
-          <td class="numeric">0</td>
-          <td></td>
-        </tr>
-        <tr class="status-passed">
-          <td>playwright-stub</td>
-          <td>generated</td>
-          <td>axe accessibility scan — Login</td>
-          <td>passed</td>
-          <td class="numeric">0</td>
-          <td></td>
-        </tr>
-        <tr class="status-passed">
-          <td>playwright-stub</td>
-          <td>generated</td>
-          <td>axe accessibility scan — Dashboard</td>
-          <td>passed</td>
-          <td class="numeric">0</td>
-          <td></td>
-        </tr>
-        <tr class="status-passed">
-          <td>playwright-stub</td>
-          <td>generated</td>
-          <td>axe accessibility scan — Invalid credentials</td>
-          <td>passed</td>
-          <td class="numeric">0</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="/portfolio/" class="site-header__title"><span>QA × SDET × LLM Portfolio</span></a>
+        <nav class="site-header__nav">
+          <a href="/portfolio/evidence/README.html">Evidence</a>
+          <a href="/portfolio/reports/junit/index.html">Reports</a>
+          <a href="https://github.com/RNA4219/portfolio">GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero__eyebrow">QA Reports</div>
+        <h1>JUnit Summary</h1>
+        <p class="meta">生成日時: 2025-09-24T01:32:16.655Z / 実行時間合計: 0.004 秒</p>
+      </section>
+      <section class="summary">
+        <div class="metric"><p class="metric__label">Total</p><p class="metric__value">6</p></div>
+        <div class="metric"><p class="metric__label">Passed</p><p class="metric__value">6</p></div>
+        <div class="metric"><p class="metric__label">Failed</p><p class="metric__value">0</p></div>
+        <div class="metric"><p class="metric__label">Errors</p><p class="metric__value">0</p></div>
+        <div class="metric"><p class="metric__label">Skipped</p><p class="metric__value">0</p></div>
+        <div class="metric"><p class="metric__label">Suites</p><p class="metric__value">1</p></div>
+      </section>
+      <div class="status-summary">
+        <span class="badge">XML: junit-results.xml</span>
+        <span class="badge">JSON: summary.json</span>
+        <a class="badge" href="/portfolio/reports/">Reports Hub</a>
+      </div>
+      <section class="table-shell">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Suite</th>
+                <th>Class</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th class="numeric">Duration (ms)</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="status-passed">
+                <td>playwright-stub</td>
+                <td>generated</td>
+                <td>data-driven login — happy path</td>
+                <td class="cell-status">passed</td>
+                <td class="numeric">3</td>
+                <td></td>
+              </tr>
+              <tr class="status-passed">
+                <td>playwright-stub</td>
+                <td>generated</td>
+                <td>data-driven login — invalid password</td>
+                <td class="cell-status">passed</td>
+                <td class="numeric">1</td>
+                <td></td>
+              </tr>
+              <tr class="status-passed">
+                <td>playwright-stub</td>
+                <td>generated</td>
+                <td>dashboard visual smoke snapshot</td>
+                <td class="cell-status">passed</td>
+                <td class="numeric">0</td>
+                <td></td>
+              </tr>
+              <tr class="status-passed">
+                <td>playwright-stub</td>
+                <td>generated</td>
+                <td>axe accessibility scan — Login</td>
+                <td class="cell-status">passed</td>
+                <td class="numeric">0</td>
+                <td></td>
+              </tr>
+              <tr class="status-passed">
+                <td>playwright-stub</td>
+                <td>generated</td>
+                <td>axe accessibility scan — Dashboard</td>
+                <td class="cell-status">passed</td>
+                <td class="numeric">0</td>
+                <td></td>
+              </tr>
+              <tr class="status-passed">
+                <td>playwright-stub</td>
+                <td>generated</td>
+                <td>axe accessibility scan — Invalid credentials</td>
+                <td class="cell-status">passed</td>
+                <td class="numeric">0</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p>&copy; 2026 QA × SDET × LLM Portfolio</p>
+    </footer>
   </body>
 </html>

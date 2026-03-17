@@ -4,7 +4,7 @@ title: QA Evidence Catalog
 description: RTMに記載されたEvidenceLinkの遷移先をまとめた検証一次情報カタログ
 ---
 
-<section class="hero" style="padding: 2rem 0 3rem;">
+<section class="hero hero--home" style="padding: 2rem 0 3rem;">
   <h1 class="hero__title">Evidence Catalog</h1>
   <p class="hero__subtitle">RTM に記載された EvidenceLink の遷移先をまとめ、検証時に参照する一次情報を一覧化</p>
 </section>
