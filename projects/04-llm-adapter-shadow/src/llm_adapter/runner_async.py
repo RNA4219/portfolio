@@ -4,7 +4,7 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Sequence
 import time
-from typing import Any
+from typing import Any, cast
 
 from ._event_loop import ensure_socket_free_event_loop_policy
 from .errors import AllFailedError
@@ -95,7 +95,7 @@ class AsyncRunner:
         else:
             providers = self.providers
         total_providers = len(providers)
-        mode = RunnerMode(self._config.mode)
+        mode = cast(RunnerMode, self._config.mode)
         metadata.setdefault("run_id", metadata.get("trace_id") or request_fingerprint)
         metadata["mode"] = mode.value
         metadata["providers"] = [provider.name() for provider, _ in providers]
