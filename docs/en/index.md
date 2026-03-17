@@ -4,12 +4,12 @@ title: Portfolio Hub (EN)
 description: A portal showcasing QA / SDET / LLM highlights with weekly summaries in English
 ---
 
-<section class="hero" style="padding: 2rem 0 3rem;">
+<section class="hero hero--home" style="padding: 2rem 0 3rem;">
   <h1 class="hero__title">QA × SDET × LLM Portfolio</h1>
   <p class="hero__subtitle">Showcasing QA automation pipelines, LLM-powered test generation, and CI observability</p>
 </section>
 
-<div class="badges">
+<div class="badges badges--hero">
   <a href="https://github.com/RNA4219/portfolio" class="badge">GitHub</a>
   <a href="{{ '/reports/junit/index.html' | relative_url }}" class="badge">JUnit Report</a>
   <a href="{{ '/reports/flaky/index.html' | relative_url }}" class="badge">Flaky Analysis</a>

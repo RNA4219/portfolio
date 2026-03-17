@@ -4,7 +4,7 @@ title: Portfolio Hub
 description: QA / SDET / LLM 成果物のハイライトと週次サマリを俯瞰できるポータル
 ---
 
-<section class="hero">
+<section class="hero hero--home">
   <h1 class="hero__title">QA × SDET × LLM Portfolio</h1>
   <p class="hero__subtitle">
     <span class="hero__subtitle-line">QA自動化パイプラインの構築・運用ノウハウ、LLM活用によるテスト生成・評価の実践知、</span>
@@ -12,7 +12,7 @@ description: QA / SDET / LLM 成果物のハイライトと週次サマリを俯
   </p>
 </section>
 
-<div class="badges">
+<div class="badges badges--hero">
   <a href="https://github.com/RNA4219/portfolio" class="badge">GitHub</a>
   <a href="{{ '/evidence/README.html' | relative_url }}" class="badge">Evidence Catalog</a>
   <a href="{{ '/reports/junit/index.html' | relative_url }}" class="badge">JUnit Report</a>
