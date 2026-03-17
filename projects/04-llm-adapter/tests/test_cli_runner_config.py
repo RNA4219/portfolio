@@ -109,9 +109,9 @@ def test_run_compare_sanitizes_runner_config(
         def __init__(self, *_args: object, **_kwargs: object) -> None:
             pass
 
-        def run(self, *, repeat: int, mode: str) -> list[str]:
+        def run(self, repeat: int, config: object) -> list[str]:
             captured["repeat"] = repeat
-            captured["mode"] = mode
+            captured["mode"] = getattr(config, "mode", None)
             return []
 
     monkeypatch.setattr(runner_api, "CompareRunner", lambda *_a, **_k: DummyRunner())

@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 import subprocess
+import sys
 
 import pytest
 
@@ -12,6 +13,7 @@ pytestmark = pytest.mark.skipif(
 )
 
 
+@pytest.mark.skipif(sys.platform == "win32", reason="subprocess pytest fails on Windows due to path issues")
 def test_runner_retry_collection_via_pytest() -> None:
     root = Path(__file__).resolve().parents[3]
     env = {**os.environ, "PYTEST_RUNNER_RETRY_DIRECT": "1"}

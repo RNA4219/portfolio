@@ -60,10 +60,12 @@ def test_ollama_provider_auto_pull_disabled_env_override(
 
 # Ollama の 429 応答を RateLimitError に正規化する。
 def test_ollama_provider_rate_limit_normalized(
+    monkeypatch: pytest.MonkeyPatch,
     provider_config_factory,
     fake_client_installer,
     ollama_module,
 ) -> None:
+    monkeypatch.setenv("LLM_ADAPTER_OFFLINE", "0")
     module = ollama_module
     local_patch = fake_client_installer(module, "rate_limit")
     try:
@@ -82,10 +84,12 @@ def test_ollama_provider_rate_limit_normalized(
 
 # 5xx 応答は RetriableError として扱い次プロバイダを待機しない。
 def test_ollama_provider_server_error_normalized(
+    monkeypatch: pytest.MonkeyPatch,
     provider_config_factory,
     fake_client_installer,
     ollama_module,
 ) -> None:
+    monkeypatch.setenv("LLM_ADAPTER_OFFLINE", "0")
     module = ollama_module
     local_patch = fake_client_installer(module, "server_error")
     try:
