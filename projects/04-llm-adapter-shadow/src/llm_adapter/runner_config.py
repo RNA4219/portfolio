@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, FrozenInstanceError
-from enum import StrEnum
+from enum import Enum, StrEnum
 from typing import cast, TYPE_CHECKING
 
 from .shadow import DEFAULT_METRICS_PATH, MetricsPath
@@ -118,7 +118,7 @@ DEFAULT_MAX_CONCURRENCY = 4
 class RunnerConfig:
     backoff: BackoffPolicy = field(default_factory=BackoffPolicy)
     max_attempts: int | None = None
-    mode: RunnerMode | str = RunnerMode.SEQUENTIAL
+    mode: RunnerMode | str | Enum = RunnerMode.SEQUENTIAL
     max_concurrency: int = DEFAULT_MAX_CONCURRENCY
     rpm: int | None = None
     consensus: ConsensusConfig | None = None
@@ -128,6 +128,8 @@ class RunnerConfig:
     def __post_init__(self) -> None:
         if isinstance(self.mode, RunnerMode):
             normalized = self.mode
+        elif isinstance(self.mode, Enum):
+            normalized = RunnerMode(self.mode.value)
         else:
             normalized = RunnerMode(self.mode)
 
