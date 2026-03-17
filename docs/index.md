@@ -7,7 +7,9 @@ description: QA / SDET / LLM 成果物のハイライトと週次サマリを俯
 <section class="hero">
   <h1 class="hero__title">QA × SDET × LLM Portfolio</h1>
   <p class="hero__subtitle">
-    QA自動化パイプラインの構築・運用ノウハウ、LLM活用によるテスト生成・評価の実践知、CIパイプラインの可観測性・改善サイクルの設計をまとめた成果物集
+    QA自動化パイプラインの構築・運用ノウハウ、LLM活用によるテスト生成・評価の実践知、
+    <br>
+    CIパイプラインの可観測性・改善サイクルの設計をまとめた成果物集
   </p>
 </section>
 
