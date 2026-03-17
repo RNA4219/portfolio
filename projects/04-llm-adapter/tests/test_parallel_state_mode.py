@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import StrEnum
+from enum import Enum, StrEnum
 from pathlib import Path
 
 from adapter.core.datasets import GoldenTask
